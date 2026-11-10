@@ -1,0 +1,13 @@
+# Système et éditeurs
+.DS_Store
+.idea/
+*.iml
+.claude/settings.local.json
+
+# Sorties de compilation et de tests
+build/
+coverage/
+.dart_tool/
+
+# Ancienne version du cours : dépôt git autonome (branches tp1-start … tp6-ref)
+likelemba/

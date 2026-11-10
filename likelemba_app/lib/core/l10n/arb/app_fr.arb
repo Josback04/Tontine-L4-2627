@@ -1,0 +1,48 @@
+{
+    "@@locale": "fr",
+    "appTitle": "Likelemba",
+    "splashLoading": "Ouverture de votre session…",
+    "loginTitle": "Bon retour !",
+    "loginSubtitle": "Connectez-vous pour gérer votre tontine.",
+    "registerTitle": "Créer un compte",
+    "registerSubtitle": "Devenez le trésorier de votre tontine.",
+    "fullNameLabel": "Nom complet",
+    "emailLabel": "Adresse e-mail",
+    "phoneLabel": "Téléphone",
+    "phoneHint": "0812345678",
+    "passwordLabel": "Mot de passe",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "loginButton": "Se connecter",
+    "registerButton": "Créer mon compte",
+    "noAccountPrompt": "Pas encore de compte ?",
+    "createAccountLink": "Créer un compte",
+    "haveAccountPrompt": "Déjà un compte ?",
+    "loginLink": "Se connecter",
+    "invalidFullName": "Saisissez votre nom complet.",
+    "invalidEmail": "Saisissez une adresse e-mail valide.",
+    "invalidPhone": "10 chiffres, commençant par 0.",
+    "invalidPassword": "Au moins {min} caractères.",
+    "@invalidPassword": {
+        "placeholders": {
+            "min": { "type": "int" }
+        }
+    },
+    "errorInvalidCredentials": "E-mail ou mot de passe incorrect.",
+    "errorEmailAlreadyUsed": "Un compte existe déjà avec cet e-mail.",
+    "errorInvalidRegistration": "Vérifiez les informations saisies.",
+    "errorNetwork": "Serveur injoignable. Vérifiez votre connexion.",
+    "errorServer": "Une erreur est survenue. Réessayez plus tard.",
+    "errorSessionExpired": "Votre session a expiré. Reconnectez-vous.",
+    "homeGreeting": "Bonjour, {name}",
+    "@homeGreeting": {
+        "placeholders": {
+            "name": { "type": "String" }
+        }
+    },
+    "roleTreasurer": "Trésorier",
+    "roleMember": "Membre",
+    "homeEmptyTitle": "Aucune tontine pour l'instant",
+    "homeEmptyBody": "Vos tontines et leurs cotisations apparaîtront ici.",
+    "logoutButton": "Se déconnecter"
+}
