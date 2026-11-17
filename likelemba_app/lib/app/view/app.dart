@@ -1,10 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:likelemba_app/core/di/injection_container.dart';
 import 'package:likelemba_app/core/l10n/l10n.dart';
 import 'package:likelemba_app/core/router/app_router.dart';
 import 'package:likelemba_app/core/theme/theme.dart';
+import 'package:likelemba_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// La racine de l'application : thème, traductions et routeur.
+/// La racine de l'application : session (AuthBloc), thème, traductions
+/// et routeur.
 class App extends StatefulWidget {
   const new({super.key});
 
@@ -23,14 +27,19 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      onGenerateTitle: (context) => context.l10n.appTitle,
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      localizationsDelegates: appLocalizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      routerConfig: _router,
+    // AuthBloc au-dessus du routeur : toutes les pages le lisent avec
+    // context.read<AuthBloc>().
+    return BlocProvider<AuthBloc>(
+      create: (_) => sl<AuthBloc>(),
+      child: MaterialApp.router(
+        onGenerateTitle: (context) => context.l10n.appTitle,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        localizationsDelegates: appLocalizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        routerConfig: _router,
+      ),
     );
   }
 }

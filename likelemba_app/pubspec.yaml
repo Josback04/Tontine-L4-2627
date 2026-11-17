@@ -9,7 +9,9 @@ environment:
 
 dependencies:
   bloc: ^9.2.1
+  copy_with_extension: ^18.0.1
   dio: ^5.11.1
+  either_dart: ^1.0.0
   equatable: ^3.0.0
   flutter:
     sdk: flutter
@@ -26,6 +28,8 @@ dev_dependencies:
   bloc_lint: ^0.4.2
   bloc_test: ^10.0.0
   bloc_tools: ^0.1.0-dev.24
+  build_runner: ^2.16.1
+  copy_with_extension_gen: ^18.0.1
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.5

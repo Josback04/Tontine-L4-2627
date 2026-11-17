@@ -11,8 +11,12 @@ Comprendre comment une feature se range en couches, en partant de ce que l'on vo
 ```
 features/auth/
 ├── presentation/          ← ce que l'utilisateur voit
-│   ├── pages/login_page.dart        LoginPage (fournit le cubit) + LoginView (dessine)
-│   ├── cubit/login_cubit.dart       l'état du formulaire
+│   ├── bloc/                        un BLoC = 4 fichiers liés par part / part of
+│   │   ├── auth_bloc.dart           le maître : Event → UseCase → emit(State)
+│   │   ├── auth_event.dart          sealed AuthEvent, LoginEvent
+│   │   ├── auth_state.dart          AuthState unique, @CopyWith()
+│   │   └── auth_bloc.g.dart         GÉNÉRÉ (copy_with_extension_gen)
+│   ├── pages/login_page.dart        LoginPage + LoginView (dessine)
 │   └── widgets/                     AuthLayout, PasswordField, FailureMessage
 ├── domain/                ← le métier, en Dart pur
 │   ├── entities/user.dart           ce qu'est un utilisateur
@@ -41,12 +45,32 @@ que `equatable` et `core/`.
    textes traduits (`context.l10n`), `PasswordField`, `PrimaryButton`.
 2. **Le domaine** (45 min) — `User`, puis le contrat `AuthRepository`, puis `LoginUseCase`
    (la règle métier : e-mail sans espaces ni majuscules), puis `InvalidCredentialsFailure`.
-3. **Le lien** (45 min) — `LoginCubit` appelle le cas d'usage et expose
-   `status` + `user` + `failure` ; la page réagit avec `BlocListener` (message de bienvenue
-   ou d'erreur) et `BlocSelector` (bouton en chargement).
+3. **Le lien : le BLoC** (45 min)
+   - `auth_event.dart` : `sealed class AuthEvent` + `LoginEvent` (Equatable). L'UI déclenche :
+     `context.read<AuthBloc>().add(LoginEvent(email: …, password: …))`.
+   - `auth_state.dart` : un **état unique** `AuthState` (`loginState`, `user`, `message`),
+     annoté `@CopyWith()`. Statuts et extensions (`isInProgress`, `isFailed`…) dans
+     `core/utils/enum.dart`.
+   - `dart run build_runner build -d` génère `auth_bloc.g.dart` : `state.copyWith(...)`,
+     `state.copyWith.message(null)`. À relancer à chaque champ ajouté, renommé ou retypé.
+   - `auth_bloc.dart` : `on<LoginEvent>(_onLoginEvent)`, écrit avec
+     `errorHandler(() async { … }).either((left) => …, (right) => null)`
+     (`core/errors/error_handler.dart`, package `either_dart`) : pas de try / catch,
+     `left.message` est déjà traduit.
+   - La page : `BlocListener` (SnackBar avec `state.message`) et `BlocSelector`
+     (bouton en chargement).
 4. **L'assemblage** (30 min) — `auth_injection.dart` et `core/di/injection_container.dart` :
    `FakeAuthRepository` est enregistré **sous le type** `AuthRepository`.
-5. **Les tests** (15 min) — `flutter test` : cas d'usage, cubit, page, faux dépôt.
+5. **Les tests** (15 min) — `flutter test` : `errorHandler`, cas d'usage, BLoC (`blocTest`),
+   page, faux dépôt.
+
+## Recette : ajouter un Event ou un champ au State
+
+1. Champ dans `auth_state.dart` : `final`, constructeur `const`, `props`.
+2. Event dans `auth_event.dart` : `class MonEvent extends AuthEvent` + `props`.
+3. `dart run build_runner build -d`.
+4. Dans `auth_bloc.dart` : `on<MonEvent>(_onMonEvent)` + `errorHandler(...).either(...)`.
+5. Dans l'UI : `BlocBuilder` / `BlocSelector` pour redessiner, `BlocListener` pour réagir.
 
 ## Lancer
 
@@ -61,5 +85,5 @@ Compte : `tresorier1@likelemba.test` / `likelemba2026`. Un autre mot de passe af
 
 À la séance sur la couche data, on remplace `FakeAuthRepository` par `AuthRepositoryImpl`
 (API `likelemba_backend` + stockage local) en changeant **une ligne** dans
-`auth_injection.dart`. Le cas d'usage, le cubit et la page ne bougent pas : c'est la preuve
+`auth_injection.dart`. Le cas d'usage, le BLoC et la page ne bougent pas : c'est la preuve
 que l'architecture tient.

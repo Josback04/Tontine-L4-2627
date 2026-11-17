@@ -2,19 +2,19 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likelemba_app/app/app.dart';
 import 'package:likelemba_app/core/di/injection_container.dart';
-import 'package:likelemba_app/features/auth/presentation/cubit/login_cubit.dart';
+import 'package:likelemba_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:likelemba_app/features/auth/presentation/pages/login_page.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-class _MockLoginCubit extends MockCubit<LoginState> implements LoginCubit;
+class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc;
 
 void main() {
   setUp(() {
-    final loginCubit = _MockLoginCubit();
-    when(() => loginCubit.state).thenReturn(const LoginState());
+    final authBloc = _MockAuthBloc();
+    when(() => authBloc.state).thenReturn(const AuthState());
     // Dans les tests, on remplace l'injection réelle par des faux.
-    sl.registerFactory<LoginCubit>(() => loginCubit);
+    sl.registerFactory<AuthBloc>(() => authBloc);
   });
 
   tearDown(sl.reset);

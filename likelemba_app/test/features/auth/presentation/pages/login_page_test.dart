@@ -1,32 +1,29 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:likelemba_app/features/auth/domain/failures/auth_failures.dart';
-import 'package:likelemba_app/features/auth/presentation/cubit/login_cubit.dart';
+import 'package:likelemba_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:likelemba_app/features/auth/presentation/pages/login_page.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../helpers/helpers.dart';
 
-class _MockLoginCubit extends MockCubit<LoginState> implements LoginCubit;
+class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc;
 
 void main() {
-  late LoginCubit loginCubit;
+  late AuthBloc authBloc;
+
+  setUpAll(
+    () => registerFallbackValue(const LoginEvent(email: '', password: '')),
+  );
 
   setUp(() {
-    loginCubit = _MockLoginCubit();
-    when(() => loginCubit.state).thenReturn(const LoginState());
-    when(
-      () => loginCubit.submit(
-        email: any(named: 'email'),
-        password: any(named: 'password'),
-      ),
-    ).thenAnswer((_) async {});
+    authBloc = _MockAuthBloc();
+    when(() => authBloc.state).thenReturn(const AuthState());
   });
 
   Future<void> pumpLoginView(WidgetTester tester) => tester.pumpApp(
-    BlocProvider.value(value: loginCubit, child: const LoginView()),
+    BlocProvider.value(value: authBloc, child: const LoginView()),
   );
 
   group(LoginView, () {
@@ -41,15 +38,12 @@ void main() {
       await tester.pump();
 
       expect(find.text('Enter a valid email address.'), findsOneWidget);
-      verifyNever(
-        () => loginCubit.submit(
-          email: any(named: 'email'),
-          password: any(named: 'password'),
-        ),
-      );
+      verifyNever(() => authBloc.add(any()));
     });
 
-    testWidgets('envoie le formulaire valide au cubit', (tester) async {
+    testWidgets('ajoute un LoginEvent quand le formulaire est valide', (
+      tester,
+    ) async {
       await pumpLoginView(tester);
       await tester.enterText(
         find.byKey(const Key('emailField')),
@@ -62,18 +56,25 @@ void main() {
       await tester.tap(find.byKey(const Key('loginButton')));
 
       verify(
-        () => loginCubit.submit(
-          email: 'tresorier1@likelemba.test',
-          password: 'likelemba2026',
+        () => authBloc.add(
+          const LoginEvent(
+            email: 'tresorier1@likelemba.test',
+            password: 'likelemba2026',
+          ),
         ),
       ).called(1);
     });
 
     testWidgets('success : souhaite la bienvenue', (tester) async {
       whenListen(
-        loginCubit,
-        Stream.value(const LoginState(status: FormStatus.success, user: tUser)),
-        initialState: const LoginState(),
+        authBloc,
+        Stream.value(
+          const AuthState(
+            loginState: AuthenticationState.authenticated,
+            user: tUser,
+          ),
+        ),
+        initialState: const AuthState(),
       );
       await pumpLoginView(tester);
       await tester.pump();
@@ -81,16 +82,16 @@ void main() {
       expect(find.text('Hello, Grâce!'), findsOneWidget);
     });
 
-    testWidgets('failure : affiche le message traduit', (tester) async {
+    testWidgets('failed : affiche state.message', (tester) async {
       whenListen(
-        loginCubit,
+        authBloc,
         Stream.value(
-          const LoginState(
-            status: FormStatus.failure,
-            failure: InvalidCredentialsFailure(),
+          const AuthState(
+            loginState: AuthenticationState.failed,
+            message: 'Incorrect email or password.',
           ),
         ),
-        initialState: const LoginState(),
+        initialState: const AuthState(),
       );
       await pumpLoginView(tester);
       await tester.pump();
