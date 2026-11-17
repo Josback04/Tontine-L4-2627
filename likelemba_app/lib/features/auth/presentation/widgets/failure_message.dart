@@ -8,8 +8,6 @@ import 'package:likelemba_app/features/auth/domain/failures/auth_failures.dart';
 extension FailureMessage on Failure {
   String message(AppLocalizations l10n) => switch (this) {
     InvalidCredentialsFailure() => l10n.errorInvalidCredentials,
-    EmailAlreadyUsedFailure() => l10n.errorEmailAlreadyUsed,
-    InvalidRegistrationFailure() => l10n.errorInvalidRegistration,
     _ => commonFailureMessage(this, l10n),
   };
 }

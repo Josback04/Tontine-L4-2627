@@ -1,9 +1,5 @@
 /// Les chemins de l'application, en un seul endroit.
+/// Chaque nouvelle feature ajoutera ses chemins ici.
 abstract final class AppRoutes {
-  static const splash = '/splash';
   static const login = '/login';
-  static const register = '/register';
-  static const home = '/';
-  static const newTontine = '/tontines/new';
-  static String tontine(String id) => '/tontines/$id';
 }

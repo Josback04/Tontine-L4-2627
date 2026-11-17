@@ -1,14 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:likelemba_app/core/di/injection_container.dart';
 import 'package:likelemba_app/core/l10n/l10n.dart';
-import 'package:likelemba_app/core/router/app_routes.dart';
 import 'package:likelemba_app/core/theme/theme.dart';
 import 'package:likelemba_app/core/utils/validators.dart';
 import 'package:likelemba_app/core/widgets/widgets.dart';
-import 'package:likelemba_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:likelemba_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:likelemba_app/features/auth/presentation/widgets/auth_layout.dart';
 import 'package:likelemba_app/features/auth/presentation/widgets/failure_message.dart';
@@ -22,6 +19,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Point d'injection côté interface : la page demande à get_it un cubit
     // tout prêt, sans connaître ni le cas d'usage ni le dépôt.
+    // Page (fournit le cubit) / View (dessine) : la View se teste seule,
+    // avec un faux cubit.
     return BlocProvider(
       create: (_) => sl<LoginCubit>(),
       child: const LoginView(),
@@ -64,16 +63,16 @@ class _LoginViewState extends State<LoginView> {
     final l10n = context.l10n;
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state.status == FormStatus.success) {
-          // Le routeur écoute AuthBloc et ouvre l'accueil.
-          context.read<AuthBloc>().add(AuthUserAuthenticated(state.user!));
-        } else if (state.status == FormStatus.failure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(state.failure!.message(l10n))),
-            );
-        }
+        // La page ne décide rien : elle affiche ce que dit l'état.
+        final message = switch (state.status) {
+          FormStatus.success => l10n.welcomeMessage(state.user!.firstName),
+          FormStatus.failure => state.failure!.message(l10n),
+          _ => null,
+        };
+        if (message == null) return;
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(SnackBar(content: Text(message)));
       },
       child: AuthLayout(
         title: l10n.loginTitle,
@@ -113,19 +112,6 @@ class _LoginViewState extends State<LoginView> {
                     isLoading: isLoading,
                     onPressed: _submit,
                   ),
-                ),
-                const SizedBox(height: AppSpacing.md),
-                // Wrap, pas Row : le lien passe à la ligne sur un petit écran.
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    Text(l10n.noAccountPrompt),
-                    TextButton(
-                      onPressed: () => context.go(AppRoutes.register),
-                      child: Text(l10n.createAccountLink),
-                    ),
-                  ],
                 ),
               ],
             ),

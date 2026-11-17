@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likelemba_app/features/auth/domain/failures/auth_failures.dart';
-import 'package:likelemba_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:likelemba_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:likelemba_app/features/auth/presentation/pages/login_page.dart';
 import 'package:material_ui/material_ui.dart';
@@ -12,17 +11,11 @@ import '../../../../helpers/helpers.dart';
 
 class _MockLoginCubit extends MockCubit<LoginState> implements LoginCubit;
 
-class _MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc;
-
 void main() {
   late LoginCubit loginCubit;
-  late AuthBloc authBloc;
-
-  setUpAll(() => registerFallbackValue(const AuthStarted()));
 
   setUp(() {
     loginCubit = _MockLoginCubit();
-    authBloc = _MockAuthBloc();
     when(() => loginCubit.state).thenReturn(const LoginState());
     when(
       () => loginCubit.submit(
@@ -30,17 +23,10 @@ void main() {
         password: any(named: 'password'),
       ),
     ).thenAnswer((_) async {});
-    when(() => authBloc.state).thenReturn(const AuthState.unauthenticated());
   });
 
   Future<void> pumpLoginView(WidgetTester tester) => tester.pumpApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: authBloc),
-        BlocProvider.value(value: loginCubit),
-      ],
-      child: const LoginView(),
-    ),
+    BlocProvider.value(value: loginCubit, child: const LoginView()),
   );
 
   group(LoginView, () {
@@ -83,7 +69,7 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('success : prévient AuthBloc', (tester) async {
+    testWidgets('success : souhaite la bienvenue', (tester) async {
       whenListen(
         loginCubit,
         Stream.value(const LoginState(status: FormStatus.success, user: tUser)),
@@ -92,7 +78,7 @@ void main() {
       await pumpLoginView(tester);
       await tester.pump();
 
-      verify(() => authBloc.add(const AuthUserAuthenticated(tUser))).called(1);
+      expect(find.text('Hello, Grâce!'), findsOneWidget);
     });
 
     testWidgets('failure : affiche le message traduit', (tester) async {

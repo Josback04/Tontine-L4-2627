@@ -13,7 +13,11 @@ class LoginParams extends Equatable {
   List<Object?> get props => [email, password];
 }
 
-/// Connecte un utilisateur existant.
+/// CAS D'USAGE : « se connecter ».
+///
+/// Une classe = une action de l'utilisateur. Il porte la règle métier
+/// (ici : l'e-mail est comparé sans espaces ni majuscules) et délègue le
+/// reste au contrat AuthRepository, dont il ne connaît pas l'implémentation.
 class LoginUseCase implements UseCase<User, LoginParams> {
   const new(this._repository);
 
