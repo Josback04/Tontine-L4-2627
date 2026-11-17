@@ -1,9 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// ENTITÉ du domaine : ce qu'est un utilisateur pour l'application.
-///
-/// Dart pur : aucun import de Flutter, de dio ou de JSON. Le domaine ne sait
-/// pas d'où vient l'utilisateur (API, base locale, faux dépôt…).
 class User extends Equatable {
   const new({
     required this.id,
@@ -17,7 +13,6 @@ class User extends Equatable {
   final String email;
   final String phone;
 
-  /// « Grâce Mbuyi » donne « Grâce ».
   String get firstName => fullName.trim().split(RegExp(r'\s+')).first;
 
   /// « Grâce Mbuyi » donne « GM ».

@@ -112,3 +112,8 @@ app.*.map.json
 
 # Generated l10n files
 lib/l10n/gen/
+# Widget Preview related
+.widget_preview/
+
+
+/docs

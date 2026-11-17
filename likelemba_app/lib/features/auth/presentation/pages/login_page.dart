@@ -8,8 +8,6 @@ import 'package:likelemba_app/features/auth/presentation/widgets/auth_layout.dar
 import 'package:likelemba_app/features/auth/presentation/widgets/password_field.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// Une page = une route. L'AuthBloc est fourni plus haut, par App :
-/// la page le lit, elle ne le crée pas.
 class LoginPage extends StatelessWidget {
   const new({super.key});
 
