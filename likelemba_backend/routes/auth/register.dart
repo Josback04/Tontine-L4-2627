@@ -42,6 +42,8 @@ Future<Response> onRequest(RequestContext context) async {
       phone: phone,
       password: password,
     );
+    // Le trésorier l'avait peut-être déjà ajouté à une tontine.
+    context.read<TontineRepository>().linkMembersTo(user);
     final token = context.read<TokenService>().issue(user);
     return Response.json(
       statusCode: HttpStatus.created,

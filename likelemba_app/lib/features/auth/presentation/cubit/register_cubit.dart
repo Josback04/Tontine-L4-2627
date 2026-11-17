@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:likelemba_app/core/errors/failures.dart';
+import 'package:likelemba_app/core/utils/statuses.dart';
 import 'package:likelemba_app/features/auth/domain/entities/user.dart';
 import 'package:likelemba_app/features/auth/domain/usecases/register_usecase.dart';
-import 'package:likelemba_app/features/auth/presentation/cubit/form_status.dart';
 
-export 'form_status.dart';
+export 'package:likelemba_app/core/utils/statuses.dart';
 
 part 'register_state.dart';
 

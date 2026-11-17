@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:likelemba_app/core/config/app_environment.dart';
 
-/// Construit le client HTTP partagé par toutes les features.
 Dio createDio(
   AppEnvironment environment, {
   List<Interceptor> interceptors = const [],

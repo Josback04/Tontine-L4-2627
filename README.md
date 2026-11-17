@@ -33,8 +33,16 @@ cd likelemba_backend && dart_frog dev          # API sur http://localhost:8080
 cd likelemba_app && flutter run --flavor development --target lib/main_development.dart
 ```
 
-Comptes de démonstration (mot de passe `likelemba2026`) : `tresorier1@likelemba.test`,
-`tresorier2@likelemba.test` (trésoriers), `membre1@likelemba.test` (membre).
+Comptes de démonstration (mot de passe `likelemba2026`) :
+
+| Compte | Mamans du marché Gambela | Enseignants de Lemba |
+| --- | --- | --- |
+| `tresorier1@likelemba.test` (Grâce) | **trésorière** | membre |
+| `tresorier2@likelemba.test` (Patrick) | — | **trésorier** |
+| `membre1@likelemba.test` (Esther) | membre | — |
+
+Les noms des comptes datent de la première version : un compte n'est plus « trésorier »
+en soi, il l'est dans une tontine donnée (voir la leçon 7).
 
 ## Comment les projets ont été générés
 
@@ -76,10 +84,15 @@ lib/
 └── features/
     ├── auth/
     │   ├── auth_injection.dart initAuthFeature(sl) : branche les trois couches
-    │   ├── domain/             DART PUR : User, AuthRepository (contrat), cas d'usage, Failure
+    │   ├── domain/             DART PUR : User (sans rôle !), AuthRepository, cas d'usage, Failure
     │   ├── data/               UserModel, sources distante (dio) et locale, AuthRepositoryImpl
     │   └── presentation/       AuthBloc (session), LoginCubit, RegisterCubit, pages, widgets
-    └── home/presentation/      HomePage (accueil après connexion)
+    ├── tontine/
+    │   ├── tontine_injection.dart
+    │   ├── domain/             Tontine, Member (porte le rôle), contrat, 7 cas d'usage
+    │   ├── data/               TontineModel, MemberModel, source distante, TontineRepositoryImpl
+    │   └── presentation/       liste, création, détail et gestion des membres
+    └── home/presentation/      HomePage : mes tontines, chacune avec MON rôle
 ```
 
 ### La règle de dépendance
@@ -121,7 +134,23 @@ Chaque leçon se termine par `flutter analyze`, `very_good test` et
 | 4 | **L'injection des dépendances** : `get_it`, point d'assemblage, intercepteur | `core/di/`, `auth_injection.dart`, `core/network/` | Remplacer la source distante par une fausse source en mode development |
 | 5 | **Le thème et l'interface** : `AppTheme`, `AuthBloc`, cubits de formulaire, routeur | `core/theme/`, `features/auth/presentation/`, `core/router/` | Ajouter une couleur d'accent ; écran « mot de passe oublié » |
 | 6 | **Les tests** : `mocktail`, `bloc_test`, tests de widgets, couverture, CI | `test/` | Tester `RegisterView` ; remonter `min_coverage` à 80 |
-| 7+ | **Feature `contribution`** : reprendre les cotisations de l'ancien `likelemba/` | `features/contribution/` | Cache SQLite hors ligne |
+| 7 | **Tontines et membres** : l'espace du trésorier, et l'erreur de modélisation du rôle ([support détaillé](docs/lecons/07-tontines-et-membres.md)) | `features/tontine/`, `routes/tontines/` | Changer l'ordre de passage ; quitter une tontine |
+| 8+ | **Feature `contribution`** : les cotisations de chaque membre, reprises de l'ancien `likelemba/` | `features/contribution/` | Cache SQLite hors ligne |
+
+### La leçon de modélisation à ne pas rater (leçon 7)
+
+> **Le rôle appartient à l'appartenance à un groupe, pas à la personne.**
+
+Jusqu'à la leçon 6, `User` portait un `role` (trésorier ou membre). Le code compilait, les
+tests passaient, et le modèle était faux : Grâce tient la caisse des mamans du marché
+Gambela et cotise simplement chez les enseignants de Lemba. Aucune valeur unique de
+`User.role` ne peut décrire ça. En leçon 7, le rôle déménage dans `Member` (l'appartenance
+à une tontine), et la règle « peut gérer » déménage avec lui dans `Tontine.canManage`.
+Les données de démonstration sont construites pour le montrer : connectée, Grâce voit une
+tontine marquée **Trésorier** et une autre marquée **Membre**.
+
+On garde volontairement cette histoire dans le cours : elle montre qu'un modèle peut
+fonctionner et être faux, parce que la question posée au métier était mauvaise.
 
 ### Scénario de démonstration « session expirée »
 

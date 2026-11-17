@@ -10,7 +10,6 @@ class UserModel extends User {
     required super.fullName,
     required super.email,
     required super.phone,
-    required super.role,
   });
 
   factory fromJson(Map<String, dynamic> json) => UserModel(
@@ -18,7 +17,6 @@ class UserModel extends User {
     fullName: json['full_name'] as String,
     email: json['email'] as String,
     phone: json['phone'] as String? ?? '',
-    role: UserRole.values.asNameMap()[json['role']] ?? UserRole.member,
   );
 
   Map<String, dynamic> toJson() => {
@@ -26,6 +24,5 @@ class UserModel extends User {
     'full_name': fullName,
     'email': email,
     'phone': phone,
-    'role': role.name,
   };
 }

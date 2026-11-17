@@ -1,4 +1,5 @@
 import 'package:likelemba_app/core/errors/failures.dart';
+import 'package:likelemba_app/core/l10n/failure_l10n.dart';
 import 'package:likelemba_app/core/l10n/l10n.dart';
 import 'package:likelemba_app/features/auth/domain/failures/auth_failures.dart';
 
@@ -9,8 +10,6 @@ extension FailureMessage on Failure {
     InvalidCredentialsFailure() => l10n.errorInvalidCredentials,
     EmailAlreadyUsedFailure() => l10n.errorEmailAlreadyUsed,
     InvalidRegistrationFailure() => l10n.errorInvalidRegistration,
-    NetworkFailure() => l10n.errorNetwork,
-    SessionExpiredFailure() => l10n.errorSessionExpired,
-    _ => l10n.errorServer,
+    _ => commonFailureMessage(this, l10n),
   };
 }

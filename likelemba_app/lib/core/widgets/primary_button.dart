@@ -1,7 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Bouton principal : affiche un indicateur et se désactive pendant
-/// le chargement, pour empêcher un double envoi du formulaire.
 class PrimaryButton extends StatelessWidget {
   const new({
     required this.label,

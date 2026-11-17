@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 /// Échec métier, compris par le domaine et l'interface.
-///
+
 /// Les dépôts (data/) traduisent les exceptions techniques en Failure ;
 /// les blocs (presentation/) transforment une Failure en message à l'écran.
 /// Chaque feature peut déclarer ses propres Failure (voir

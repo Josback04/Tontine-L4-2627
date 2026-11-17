@@ -1,7 +1,6 @@
 import 'package:likelemba_app/core/theme/theme.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// Pastille verte et or : la cagnotte au centre du cercle des membres.
 class LikelembaLogo extends StatelessWidget {
   const new({super.key, this.size = 72});
 

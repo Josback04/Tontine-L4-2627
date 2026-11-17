@@ -17,7 +17,6 @@ class UserRepository {
         fullName: seed.fullName,
         email: seed.email,
         phone: seed.phone,
-        role: seed.role,
         passwordHash: _hasher.hash(demoPassword),
         createdAt: DateTime.utc(2026, 9),
       );
@@ -33,26 +32,30 @@ class UserRepository {
       fullName: 'Grâce Mbuyi',
       email: 'tresorier1@likelemba.test',
       phone: '0812345678',
-      role: UserRole.treasurer,
     ),
     (
       id: 'usr-002',
       fullName: 'Patrick Kabongo',
       email: 'tresorier2@likelemba.test',
       phone: '0998765432',
-      role: UserRole.treasurer,
     ),
     (
       id: 'usr-003',
       fullName: 'Esther Lukusa',
       email: 'membre1@likelemba.test',
       phone: '0823456789',
-      role: UserRole.member,
     ),
   ];
 
   final PasswordHasher _hasher;
   final Map<String, User> _users = {};
+
+  User? findByPhone(String phone) {
+    for (final user in _users.values) {
+      if (user.phone == phone) return user;
+    }
+    return null;
+  }
 
   User? findById(String id) {
     for (final user in _users.values) {
@@ -76,7 +79,6 @@ class UserRepository {
     required String email,
     required String phone,
     required String password,
-    UserRole role = UserRole.treasurer,
   }) {
     final key = _normalize(email);
     if (_users.containsKey(key)) throw const EmailAlreadyUsedException();
@@ -85,7 +87,6 @@ class UserRepository {
       fullName: fullName.trim(),
       email: key,
       phone: phone.trim(),
-      role: role,
       passwordHash: _hasher.hash(password),
       createdAt: DateTime.now().toUtc(),
     );

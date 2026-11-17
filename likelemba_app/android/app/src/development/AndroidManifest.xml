@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- En development, l'API locale est en HTTP (http://10.0.2.2:8080).
+         Android bloque le HTTP non chiffré par défaut : on l'autorise
+         uniquement pour cette saveur. Staging et production restent en HTTPS. -->
+    <application android:usesCleartextTraffic="true"/>
+</manifest>

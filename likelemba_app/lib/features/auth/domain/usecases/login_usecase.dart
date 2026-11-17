@@ -21,7 +21,6 @@ class LoginUseCase implements UseCase<User, LoginParams> {
 
   @override
   Future<User> call(LoginParams params) => _repository.login(
-    // Règle métier : l'e-mail ne dépend ni de la casse ni des espaces.
     email: params.email.trim().toLowerCase(),
     password: params.password,
   );

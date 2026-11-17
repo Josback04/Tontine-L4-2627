@@ -25,7 +25,9 @@
     "invalidPassword": "Au moins {min} caractères.",
     "@invalidPassword": {
         "placeholders": {
-            "min": { "type": "int" }
+            "min": {
+                "type": "int"
+            }
         }
     },
     "errorInvalidCredentials": "E-mail ou mot de passe incorrect.",
@@ -37,12 +39,83 @@
     "homeGreeting": "Bonjour, {name}",
     "@homeGreeting": {
         "placeholders": {
-            "name": { "type": "String" }
+            "name": {
+                "type": "String"
+            }
         }
     },
     "roleTreasurer": "Trésorier",
     "roleMember": "Membre",
     "homeEmptyTitle": "Aucune tontine pour l'instant",
-    "homeEmptyBody": "Vos tontines et leurs cotisations apparaîtront ici.",
-    "logoutButton": "Se déconnecter"
+    "logoutButton": "Se déconnecter",
+    "myTontinesTitle": "Mes tontines",
+    "createTontineButton": "Créer une tontine",
+    "tontinesEmptyBody": "Créez votre première tontine, ou demandez à un trésorier de vous ajouter avec votre numéro de téléphone.",
+    "retryButton": "Réessayer",
+    "frequencyWeekly": "Hebdomadaire",
+    "frequencyMonthly": "Mensuelle",
+    "perRound": "{amount} par tour",
+    "@perRound": {
+        "placeholders": {
+            "amount": {
+                "type": "String"
+            }
+        }
+    },
+    "membersCount": "{count, plural, =0{Aucun membre} =1{1 membre} other{{count} membres}}",
+    "@membersCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "potLabel": "Cagnotte par tour",
+    "startDateLabel": "Début",
+    "contributionLabel": "Cotisation",
+    "createTontineTitle": "Nouvelle tontine",
+    "createTontineHint": "Vous en serez le trésorier : vous pourrez ensuite ajouter les membres.",
+    "tontineNameLabel": "Nom de la tontine",
+    "contributionAmountLabel": "Cotisation par membre (FC)",
+    "frequencyLabel": "Fréquence",
+    "startDateField": "Date de début",
+    "createTontineSubmit": "Créer la tontine",
+    "invalidTontineName": "Au moins 3 caractères.",
+    "invalidAmount": "Saisissez un montant supérieur à 0.",
+    "membersTitle": "Membres",
+    "addMemberButton": "Ajouter un membre",
+    "addMemberTitle": "Nouveau membre",
+    "editMemberTitle": "Modifier le membre",
+    "memberFormHint": "Pas besoin de l'application : le nom et le téléphone suffisent. Si la personne s'inscrit un jour avec ce numéro, sa fiche sera reliée à son compte.",
+    "saveButton": "Enregistrer",
+    "cancelButton": "Annuler",
+    "payoutOrder": "Tour n°{order}",
+    "@payoutOrder": {
+        "placeholders": {
+            "order": {
+                "type": "int"
+            }
+        }
+    },
+    "noAccount": "Sans compte",
+    "memberReadOnlyNotice": "Vous êtes membre de cette tontine : seul un trésorier peut modifier la liste.",
+    "editMemberAction": "Modifier",
+    "makeTreasurerAction": "Nommer trésorier",
+    "removeTreasurerAction": "Retirer le rôle de trésorier",
+    "removeMemberAction": "Retirer de la tontine",
+    "removeMemberConfirm": "Retirer {name} de la tontine ?",
+    "@removeMemberConfirm": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "removeButton": "Retirer",
+    "errorTontineNotFound": "Cette tontine est introuvable.",
+    "errorNotTreasurer": "Seul un trésorier de cette tontine peut faire cela.",
+    "errorPhoneAlreadyMember": "Ce numéro est déjà membre de la tontine.",
+    "errorLastTreasurer": "La tontine doit garder au moins un trésorier.",
+    "errorInvalidTontineData": "Vérifiez les informations saisies.",
+    "myRoleLabel": "Mon rôle dans cette tontine"
 }

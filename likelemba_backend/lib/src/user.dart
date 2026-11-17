@@ -1,13 +1,7 @@
-/// Rôle d'un utilisateur dans une tontine.
-enum UserRole {
-  /// Tient la caisse : enregistre les cotisations.
-  treasurer,
-
-  /// Cotise chaque tour.
-  member,
-}
-
-/// Un utilisateur tel que le serveur le stocke.
+/// Une personne qui a un compte Likelemba.
+///
+/// Pas de rôle ici : on est trésorier ou membre D'UNE tontine, pas de
+/// l'application. Le rôle vit dans `Member` (voir member.dart).
 ///
 /// [passwordHash] ne quitte jamais le serveur : [toJson] ne l'écrit pas.
 class User {
@@ -16,7 +10,6 @@ class User {
     required this.fullName,
     required this.email,
     required this.phone,
-    required this.role,
     required this.passwordHash,
     required this.createdAt,
   });
@@ -25,7 +18,6 @@ class User {
   final String fullName;
   final String email;
   final String phone;
-  final UserRole role;
   final String passwordHash;
   final DateTime createdAt;
 
@@ -35,7 +27,6 @@ class User {
     'full_name': fullName,
     'email': email,
     'phone': phone,
-    'role': role.name,
     'created_at': createdAt.toUtc().toIso8601String(),
   };
 }

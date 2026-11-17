@@ -10,7 +10,7 @@ class TokenService {
 
   /// Le jeton porte l'identifiant de l'utilisateur dans `sub`.
   String issue(User user) => JWT(
-    {'role': user.role.name},
+    <String, Object?>{},
     subject: user.id,
     issuer: 'likelemba',
   ).sign(SecretKey(secret), expiresIn: ttl);

@@ -295,17 +295,263 @@ abstract class AppLocalizations {
   /// **'Aucune tontine pour l\'instant'**
   String get homeEmptyTitle;
 
-  /// No description provided for @homeEmptyBody.
-  ///
-  /// In fr, this message translates to:
-  /// **'Vos tontines et leurs cotisations apparaîtront ici.'**
-  String get homeEmptyBody;
-
   /// No description provided for @logoutButton.
   ///
   /// In fr, this message translates to:
   /// **'Se déconnecter'**
   String get logoutButton;
+
+  /// No description provided for @myTontinesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes tontines'**
+  String get myTontinesTitle;
+
+  /// No description provided for @createTontineButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer une tontine'**
+  String get createTontineButton;
+
+  /// No description provided for @tontinesEmptyBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créez votre première tontine, ou demandez à un trésorier de vous ajouter avec votre numéro de téléphone.'**
+  String get tontinesEmptyBody;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réessayer'**
+  String get retryButton;
+
+  /// No description provided for @frequencyWeekly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hebdomadaire'**
+  String get frequencyWeekly;
+
+  /// No description provided for @frequencyMonthly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mensuelle'**
+  String get frequencyMonthly;
+
+  /// No description provided for @perRound.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} par tour'**
+  String perRound(String amount);
+
+  /// No description provided for @membersCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucun membre} =1{1 membre} other{{count} membres}}'**
+  String membersCount(int count);
+
+  /// No description provided for @potLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cagnotte par tour'**
+  String get potLabel;
+
+  /// No description provided for @startDateLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Début'**
+  String get startDateLabel;
+
+  /// No description provided for @contributionLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cotisation'**
+  String get contributionLabel;
+
+  /// No description provided for @createTontineTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle tontine'**
+  String get createTontineTitle;
+
+  /// No description provided for @createTontineHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous en serez le trésorier : vous pourrez ensuite ajouter les membres.'**
+  String get createTontineHint;
+
+  /// No description provided for @tontineNameLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la tontine'**
+  String get tontineNameLabel;
+
+  /// No description provided for @contributionAmountLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cotisation par membre (FC)'**
+  String get contributionAmountLabel;
+
+  /// No description provided for @frequencyLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fréquence'**
+  String get frequencyLabel;
+
+  /// No description provided for @startDateField.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date de début'**
+  String get startDateField;
+
+  /// No description provided for @createTontineSubmit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer la tontine'**
+  String get createTontineSubmit;
+
+  /// No description provided for @invalidTontineName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Au moins 3 caractères.'**
+  String get invalidTontineName;
+
+  /// No description provided for @invalidAmount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saisissez un montant supérieur à 0.'**
+  String get invalidAmount;
+
+  /// No description provided for @membersTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres'**
+  String get membersTitle;
+
+  /// No description provided for @addMemberButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un membre'**
+  String get addMemberButton;
+
+  /// No description provided for @addMemberTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau membre'**
+  String get addMemberTitle;
+
+  /// No description provided for @editMemberTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le membre'**
+  String get editMemberTitle;
+
+  /// No description provided for @memberFormHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas besoin de l\'application : le nom et le téléphone suffisent. Si la personne s\'inscrit un jour avec ce numéro, sa fiche sera reliée à son compte.'**
+  String get memberFormHint;
+
+  /// No description provided for @saveButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer'**
+  String get saveButton;
+
+  /// No description provided for @cancelButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get cancelButton;
+
+  /// No description provided for @payoutOrder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tour n°{order}'**
+  String payoutOrder(int order);
+
+  /// No description provided for @noAccount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans compte'**
+  String get noAccount;
+
+  /// No description provided for @memberReadOnlyNotice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous êtes membre de cette tontine : seul un trésorier peut modifier la liste.'**
+  String get memberReadOnlyNotice;
+
+  /// No description provided for @editMemberAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier'**
+  String get editMemberAction;
+
+  /// No description provided for @makeTreasurerAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nommer trésorier'**
+  String get makeTreasurerAction;
+
+  /// No description provided for @removeTreasurerAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer le rôle de trésorier'**
+  String get removeTreasurerAction;
+
+  /// No description provided for @removeMemberAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer de la tontine'**
+  String get removeMemberAction;
+
+  /// No description provided for @removeMemberConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer {name} de la tontine ?'**
+  String removeMemberConfirm(String name);
+
+  /// No description provided for @removeButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer'**
+  String get removeButton;
+
+  /// No description provided for @errorTontineNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette tontine est introuvable.'**
+  String get errorTontineNotFound;
+
+  /// No description provided for @errorNotTreasurer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seul un trésorier de cette tontine peut faire cela.'**
+  String get errorNotTreasurer;
+
+  /// No description provided for @errorPhoneAlreadyMember.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce numéro est déjà membre de la tontine.'**
+  String get errorPhoneAlreadyMember;
+
+  /// No description provided for @errorLastTreasurer.
+  ///
+  /// In fr, this message translates to:
+  /// **'La tontine doit garder au moins un trésorier.'**
+  String get errorLastTreasurer;
+
+  /// No description provided for @errorInvalidTontineData.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifiez les informations saisies.'**
+  String get errorInvalidTontineData;
+
+  /// No description provided for @myRoleLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mon rôle dans cette tontine'**
+  String get myRoleLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

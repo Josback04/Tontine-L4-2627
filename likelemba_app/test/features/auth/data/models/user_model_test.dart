@@ -15,10 +15,5 @@ void main() {
     test('toJson redonne le même JSON (aller-retour)', () {
       expect(tUserModel.toJson(), tUserJson);
     });
-
-    test('un rôle inconnu devient member', () {
-      final json = {...tUserJson, 'role': 'admin'};
-      expect(UserModel.fromJson(json).role, UserRole.member);
-    });
   });
 }

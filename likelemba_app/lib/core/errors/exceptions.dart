@@ -9,7 +9,6 @@ class ServerException implements Exception {
 
   final int statusCode;
 
-  /// Le champ `code` du corps d'erreur de l'API (ex. `invalid_credentials`).
   final String code;
 
   @override

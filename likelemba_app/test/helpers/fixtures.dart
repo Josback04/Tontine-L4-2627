@@ -8,7 +8,6 @@ const tUserJson = <String, dynamic>{
   'full_name': 'Grâce Mbuyi',
   'email': 'tresorier1@likelemba.test',
   'phone': '0812345678',
-  'role': 'treasurer',
 };
 
 const tUserModel = UserModel(
@@ -16,7 +15,6 @@ const tUserModel = UserModel(
   fullName: 'Grâce Mbuyi',
   email: 'tresorier1@likelemba.test',
   phone: '0812345678',
-  role: UserRole.treasurer,
 );
 
 const User tUser = tUserModel;

@@ -2,7 +2,6 @@ import 'package:likelemba_app/core/theme/app_colors.dart';
 import 'package:likelemba_app/core/theme/app_spacing.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// Les deux thèmes de l'application, construits à partir de AppColors.
 abstract final class AppTheme {
   static ThemeData get light => _build(
     const ColorScheme(

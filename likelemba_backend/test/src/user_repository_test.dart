@@ -13,7 +13,6 @@ void main() {
         UserRepository.demoPassword,
       );
       expect(user?.id, 'usr-001');
-      expect(user?.role, UserRole.treasurer);
     });
 
     test('refuse un mauvais mot de passe', () {

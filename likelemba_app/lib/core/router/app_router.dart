@@ -6,9 +6,9 @@ import 'package:likelemba_app/features/auth/presentation/pages/login_page.dart';
 import 'package:likelemba_app/features/auth/presentation/pages/register_page.dart';
 import 'package:likelemba_app/features/auth/presentation/pages/splash_page.dart';
 import 'package:likelemba_app/features/home/presentation/pages/home_page.dart';
+import 'package:likelemba_app/features/tontine/presentation/pages/create_tontine_page.dart';
+import 'package:likelemba_app/features/tontine/presentation/pages/tontine_detail_page.dart';
 
-/// Point d'assemblage de la navigation : le seul fichier de core/ (avec di/)
-/// qui connaît les pages des features.
 GoRouter createRouter(AuthBloc authBloc) {
   const publicRoutes = {AppRoutes.login, AppRoutes.register};
 
@@ -44,6 +44,16 @@ GoRouter createRouter(AuthBloc authBloc) {
       GoRoute(
         path: AppRoutes.home,
         builder: (context, state) => const HomePage(),
+      ),
+      // « new » avant « :id », sinon « new » serait lu comme un identifiant.
+      GoRoute(
+        path: AppRoutes.newTontine,
+        builder: (context, state) => const CreateTontinePage(),
+      ),
+      GoRoute(
+        path: '/tontines/:id',
+        builder: (context, state) =>
+            TontineDetailPage(tontineId: state.pathParameters['id']!),
       ),
     ],
   );

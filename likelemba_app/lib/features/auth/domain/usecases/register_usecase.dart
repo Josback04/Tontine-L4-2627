@@ -20,7 +20,6 @@ class RegisterParams extends Equatable {
   List<Object?> get props => [fullName, email, phone, password];
 }
 
-/// Crée un compte de trésorier, puis ouvre sa session.
 class RegisterUseCase implements UseCase<User, RegisterParams> {
   const new(this._repository);
 

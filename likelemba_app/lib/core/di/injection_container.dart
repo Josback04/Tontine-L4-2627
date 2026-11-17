@@ -6,9 +6,10 @@ import 'package:likelemba_app/core/network/dio_factory.dart';
 import 'package:likelemba_app/features/auth/auth_injection.dart';
 import 'package:likelemba_app/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:likelemba_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:likelemba_app/features/tontine/tontine_injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Le localisateur de services (service locator).
+/// Le service locator
 final GetIt sl = GetIt.instance;
 
 /// Le point d'assemblage (composition root), appelé une seule fois par
@@ -44,4 +45,5 @@ Future<void> initDependencies(AppEnvironment environment) async {
 
   // ── features/ ────────────────────────────────────────────────────────────
   initAuthFeature(sl);
+  initTontineFeature(sl);
 }
